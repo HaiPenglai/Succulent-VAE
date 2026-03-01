@@ -79,3 +79,54 @@ python cluster_succulents.py
 ![image-20260301171217399](./assets/image-20260301171217399.png)
 
 ![image-20260301171623924](./assets/image-20260301171623924.png)
+
+### 下载仓库-数据增强
+
+快速联网，下载仓库：
+
+```shell
+source /etc/network_turbo
+git clone https://github.com/HaiPenglai/Succulent-VAE
+```
+
+数据增强，随机旋转+缩放，一张变2张，总共2000张。最后会调整一下尺寸，从256尺寸改成128尺寸的，比较好训练。
+
+```shell
+python augment.py
+```
+
+### 开始训练
+
+安装库:
+
+```shell
+pip install accelerate diffusers
+```
+
+开始训练
+
+```shell
+python train.py 
+```
+
+第一次开启训练之后首先会去下载一下VGG的权重，这是因为用到了感知损失。
+
+### 训练监控
+
+大概每30秒训练一轮，一分钟训练两轮，大概训练了100分钟。其中的mse损失下降了上百倍，感知损失下降的10多倍
+
+重建效果：
+
+![image-20260301202605414](./assets/image-20260301202605414.png)
+
+### 融合
+
+```shell
+python fusion.py --epoch 200 --num_pairs 50
+```
+
+![fusion_pair_13](./assets/fusion_pair_13.png)
+
+![fusion_pair_17](./assets/fusion_pair_17.png)
+
+![fusion_pair_30](./assets/fusion_pair_30.png)

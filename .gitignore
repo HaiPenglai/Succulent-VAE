@@ -1,1 +1,7 @@
 /raw
+/augmented_dataset
+/samples_vae
+/succulent_vae_model
+/succulent_vae_128_model
+/fusion_results
+/huggingface
